@@ -53,21 +53,20 @@ public class CategoriaDAO implements CrudSimpleInterface<Categoria> {
         return registros;
     }
 
-    @Override
+   @Override
     public boolean insertar(Categoria obj) {
         resp=false;
         try {
-            ps=CON.conectar().prepareStatement("INSERT INTO categoria(nombre, descripcion, activo) VALUES (?,?,1)");
+            ps=CON.conectar().prepareStatement("INSERT INTO categoria (nombre,descripcion,activo) VALUES (?,?,1)");
             ps.setString(1, obj.getNombre());
             ps.setString(2, obj.getDescripcion());
-            if(ps.executeUpdate()>0){
+            if (ps.executeUpdate()>0){
                 resp=true;
             }
             ps.close();
-            
-        } catch (SQLException e) {
+        }  catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-        }finally {
+        } finally{
             ps=null;
             CON.desconectar();
         }
@@ -164,17 +163,20 @@ public class CategoriaDAO implements CrudSimpleInterface<Categoria> {
     public boolean existe(String texto) {
         resp=false;
         try {
-            ps=CON.conectar().prepareStatement("SELECT nombre FROM categoria WHERE nombre=?");
+            ps=CON.conectar().prepareStatement("SELECT nombre FROM categoria WHERE nombre=?", ResultSet.TYPE_SCROLL_SENSITIVE, 
+                        ResultSet.CONCUR_UPDATABLE);
             ps.setString(1, texto);
             rs=ps.executeQuery();
             rs.last();
             if(rs.getRow()>0){
+                //si el resultado es de mas de una fila entonces ya existe el registro
                 resp=true;
             }
             ps.close();
             rs.close();
             
         } catch (SQLException e) {
+            //Si lo dejo activo sale un error siempre al registrar
             JOptionPane.showMessageDialog(null, e.getMessage());
         }finally {
             ps=null;
