@@ -28,9 +28,9 @@ public class FrmCategoria extends javax.swing.JInternalFrame {
         tabGeneral.setEnabledAt(1, false);
         this.accion="guardar";
         txtId.setVisible(false);
-        btnDesactivar.setVisible(false);
-        btnActivar.setVisible(false);
-        btnEditar.setVisible(false);
+        //btnDesactivar.setVisible(false);
+        //btnActivar.setVisible(false);
+        //btnEditar.setVisible(false);
     }
     
     private void listar(String texto){
