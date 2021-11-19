@@ -110,7 +110,7 @@ public class ArticuloControl {
                 return "Error en la actualización.";
             }
         }else{
-            if (DATOS.existe(nombre)){
+            if (DATOS.existe(codigo)){
                 return "El registro ya existe.";
             }else{
                 obj.setId(id);
