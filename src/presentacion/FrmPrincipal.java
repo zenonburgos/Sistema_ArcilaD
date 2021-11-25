@@ -5,19 +5,11 @@
  */
 package presentacion;
 
-import de.javasoft.plaf.synthetica.SyntheticaBlackEyeLookAndFeel;
-import de.javasoft.plaf.synthetica.SyntheticaBlueMoonLookAndFeel;
-import de.javasoft.plaf.synthetica.SyntheticaSimple2DLookAndFeel;
-import de.javasoft.plaf.synthetica.SyntheticaStandardLookAndFeel;
-import de.javasoft.plaf.synthetica.SyntheticaWhiteVisionLookAndFeel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+
+
 
 
 /**
@@ -235,13 +227,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 
-                try {
-                    UIManager.setLookAndFeel(new SyntheticaSimple2DLookAndFeel());
-                } catch (UnsupportedLookAndFeelException ex) {
-                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ParseException ex) {
-                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                }
+//                try {
+//                    UIManager.setLookAndFeel(new SubstanceOfficeSilver2007LookAndFeel());
+//                } catch (UnsupportedLookAndFeelException ex) {
+//                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+//                }
                
                 new FrmPrincipal().setVisible(true);
             }
