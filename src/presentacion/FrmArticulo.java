@@ -5,7 +5,18 @@
  */
 package presentacion;
 
+import entidades.Categoria;
+import java.awt.Image;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableRowSorter;
 import negocio.ArticuloControl;
@@ -19,6 +30,18 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
     private final ArticuloControl CONTROL;
     private String accion;
     private String nombreAnt;
+    
+    private String rutaOrigen;
+    private String rutaDestino;
+    private final String DIRECTORIO="src/files/articulos/";
+    private String imagen="";
+    private String imagenAnt;
+    
+    private int totalPorPagina = 10;
+    private int numPagina = 1;
+    private boolean primeraCarga = true;
+    private int totalRegistros;
+    
     /**
      * Creates new form FrmCategoria
      */
@@ -55,9 +78,36 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
         cboCategoria.setModel(items);
     }
     
+     private void subirImagenes(){
+        File origen=new File(this.rutaOrigen);
+        File destino=new File(this.rutaDestino);
+        try {
+            InputStream in= new FileInputStream(origen);
+            OutputStream out=new FileOutputStream(destino);
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+            in.close();
+            out.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+    
     private void limpiar(){
+        txtCodigo.setText("");
         txtNombre.setText("");
         txtDescripcion.setText("");
+        txtId.setText("");
+        txtPrecioVenta.setText("");
+        txtStock.setText("");
+        this.imagen="";
+        this.imagenAnt="";
+        lblImagen.setIcon(null);
+        this.rutaDestino="";
+        this.rutaOrigen="";
         this.accion="guardar";
     }
     
@@ -102,6 +152,15 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
         txtId = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         cboCategoria = new javax.swing.JComboBox();
+        jLabel6 = new javax.swing.JLabel();
+        txtCodigo = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtPrecioVenta = new javax.swing.JFormattedTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtStock = new javax.swing.JFormattedTextField();
+        jLabel9 = new javax.swing.JLabel();
+        lblImagen = new javax.swing.JLabel();
+        btnAgregarImagen = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
@@ -239,6 +298,28 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
 
         cboCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "cboCategoria" }));
 
+        jLabel6.setText("Código");
+
+        jLabel7.setText("Precio Venta (*)");
+
+        txtPrecioVenta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        jLabel8.setText("Stock (*)");
+
+        txtStock.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        jLabel9.setText("Imagen");
+
+        lblImagen.setBackground(new java.awt.Color(255, 255, 102));
+        lblImagen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        btnAgregarImagen.setText("Agregar");
+        btnAgregarImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarImagenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -248,31 +329,44 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 457, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 447, Short.MAX_VALUE)
                         .addComponent(btnGuardar)
                         .addGap(18, 18, 18)
                         .addComponent(btnCancelar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(txtNombre)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel2))
+                                .addGap(43, 43, 43)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cboCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 706, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(53, 53, 53)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9))
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnAgregarImagen))
+                                    .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addGap(46, 46, 46)
-                .addComponent(cboCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,17 +375,36 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(cboCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(btnAgregarImagen))
+                        .addGap(0, 129, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar)
@@ -330,13 +443,29 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         if (tablaListado.getSelectedRowCount()==1){
             String id= String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),0));
-            String nombre= String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),1));
-            this.nombreAnt= String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),1));
-            String descripcion= String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),2));
+            int categoriaId=Integer.parseInt(String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),1)));
+            String categoriaNombre=String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),2));
+            String codigo=String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),3));
+            String nombre= String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),4));
+            this.nombreAnt= String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),4));
+            String precioVenta= String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),5));
+            String stock= String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),6));
+            String descripcion= String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),7));
+            this.imagenAnt=String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),8));
             
             txtId.setText(id);
+            Categoria seleccionado=new Categoria(categoriaId,categoriaNombre);
+            cboCategoria.setSelectedItem(seleccionado);
+            txtCodigo.setText(codigo);
             txtNombre.setText(nombre);
+            txtPrecioVenta.setText(precioVenta);
+            txtStock.setText(stock);            
             txtDescripcion.setText(descripcion);
+            
+            ImageIcon im=new ImageIcon(this.DIRECTORIO+this.imagenAnt);
+            Icon icono=new ImageIcon(im.getImage().getScaledInstance(lblImagen.getWidth(),lblImagen.getHeight(),Image.SCALE_DEFAULT));
+            lblImagen.setIcon(icono);
+            lblImagen.repaint();
             
             tabGeneral.setEnabledAt(0, false);
             tabGeneral.setEnabledAt(1, true);
@@ -394,13 +523,23 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        if (txtNombre.getText().length()==0 || txtNombre.getText().length()>20){
-            JOptionPane.showMessageDialog(this, "Debes ingresar un nombre y no debe ser mayor a 20 caracteres, es obligatorio.","Sistema", JOptionPane.WARNING_MESSAGE);
+       if (txtNombre.getText().length()==0 || txtNombre.getText().length()>100){
+            JOptionPane.showMessageDialog(this, "Debes ingresar un nombre y no debe ser mayor a 100 caracteres, es obligatorio.","Sistema", JOptionPane.WARNING_MESSAGE);
             txtNombre.requestFocus();
             return;
         }
+        if (txtPrecioVenta.getText().length()==0){
+            JOptionPane.showMessageDialog(this, "Debes ingresar un precio de venta, es obligatorio.","Sistema", JOptionPane.WARNING_MESSAGE);
+            txtPrecioVenta.requestFocus();
+            return;
+        }
+        if (txtStock.getText().length()==0){
+            JOptionPane.showMessageDialog(this, "Debes ingresar un stock del artÃ­culo, es obligatorio.","Sistema", JOptionPane.WARNING_MESSAGE);
+            txtStock.requestFocus();
+            return;
+        }
         if (txtDescripcion.getText().length()>255){
-            JOptionPane.showMessageDialog(this, "Debes ingresar una descripción no mayor a 255 caracteres.","Sistema", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Debes ingresar una descripciÃ³n no mayor a 255 caracteres.","Sistema", JOptionPane.WARNING_MESSAGE);
             txtDescripcion.requestFocus();
             return;
         }
@@ -421,9 +560,12 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
             }
         }else{
             //guardar
-            resp="OK";
-            //resp=this.CONTROL.insertar(txtNombre.getText(), txtDescripcion.getText());
+            Categoria seleccionado = (Categoria) cboCategoria.getSelectedItem();
+            resp=this.CONTROL.insertar(seleccionado.getId(),txtCodigo.getText(),txtNombre.getText(),Double.parseDouble(txtPrecioVenta.getText()),Integer.parseInt(txtStock.getText()), txtDescripcion.getText(),this.imagen);
             if(resp.equals("OK")){
+                if (!this.imagen.equals("")){
+                    this.subirImagenes();
+                }
                 this.mensajeOk("Registrado correctamente");
                 this.limpiar();
                 this.listar("");
@@ -437,9 +579,25 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void btnAgregarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarImagenActionPerformed
+        JFileChooser file = new JFileChooser();
+        int estado=file.showOpenDialog(this);
+        if (estado==JFileChooser.APPROVE_OPTION){
+            this.imagen=file.getSelectedFile().getName();
+            this.rutaOrigen=file.getSelectedFile().getAbsolutePath();
+            this.rutaDestino=this.DIRECTORIO + this.imagen;
+
+            ImageIcon im=new ImageIcon(this.rutaOrigen);
+            Icon icono=new ImageIcon(im.getImage().getScaledInstance(lblImagen.getWidth(),lblImagen.getHeight(),Image.SCALE_DEFAULT));
+            lblImagen.setIcon(icono);
+            lblImagen.repaint();
+        }
+    }//GEN-LAST:event_btnAgregarImagenActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActivar;
+    private javax.swing.JButton btnAgregarImagen;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnDesactivar;
@@ -452,16 +610,24 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblImagen;
     private javax.swing.JLabel lblTotalRegistros;
     private javax.swing.JTabbedPane tabGeneral;
     private javax.swing.JTable tablaListado;
     private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JFormattedTextField txtPrecioVenta;
+    private javax.swing.JFormattedTextField txtStock;
     // End of variables declaration//GEN-END:variables
 }

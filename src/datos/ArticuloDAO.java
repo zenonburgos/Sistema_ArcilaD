@@ -168,7 +168,8 @@ public class ArticuloDAO implements CrudPaginadoInterface<Articulo> {
     public boolean existe(String texto) {
         resp=false;
         try {
-            ps=CON.conectar().prepareStatement("SELECT nombre FROM articulo WHERE nombre=?");
+            ps=CON.conectar().prepareStatement("SELECT nombre FROM articulo WHERE nombre=?", ResultSet.TYPE_SCROLL_SENSITIVE, 
+                        ResultSet.CONCUR_UPDATABLE);
             ps.setString(1, texto);
             rs=ps.executeQuery();
             rs.last();
