@@ -546,8 +546,14 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
         String resp;
         if (this.accion.equals("editar")){
             //Editar
-            resp="OK";
-            //resp=this.CONTROL.actualizar(Integer.parseInt(txtId.getText()),txtNombre.getText(),this.nombreAnt, txtDescripcion.getText());
+            String imagenActual="";
+            if (this.imagen.equals("")){
+                imagenActual=this.imagenAnt;
+            }else{
+                imagenActual=this.imagen;
+            }
+            Categoria seleccionado = (Categoria)cboCategoria.getSelectedItem();
+            resp=this.CONTROL.actualizar(Integer.parseInt(txtId.getText()),seleccionado.getId(),txtCodigo.getText(),txtNombre.getText(),this.nombreAnt,Double.parseDouble(txtPrecioVenta.getText()),Integer.parseInt(txtStock.getText()), txtDescripcion.getText(),imagenActual);
             if(resp.equals("OK")){
                 this.mensajeOk("Actualizado correctamente");
                 this.limpiar();
