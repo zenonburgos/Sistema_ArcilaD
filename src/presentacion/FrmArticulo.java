@@ -48,7 +48,9 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
     public FrmArticulo() {
         initComponents();
         this.CONTROL=new ArticuloControl();
-        this.listar("");
+        this.paginar();
+        this.listar("", false);
+        this.primeraCarga=false;
         tabGeneral.setEnabledAt(1, false);
         this.accion="guardar";
         txtId.setVisible(false);
@@ -65,8 +67,36 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
         tablaListado.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
     }
     
-    private void listar(String texto){
-        tablaListado.setModel(this.CONTROL.listar(texto, 10,1));
+    private void paginar(){
+        int totalPaginas;
+        
+        this.totalRegistros=this.CONTROL.total();
+        this.totalPorPagina=Integer.parseInt((String)cboTotalPorPagina.getSelectedItem());
+        totalPaginas=(int)(Math.ceil((double)this.totalRegistros/this.totalPorPagina));
+        if (totalPaginas==0){
+            totalPaginas=1;
+        }
+        cboNumPagina.removeAllItems();
+        
+        for (int i = 1; i <= totalPaginas; i++) {
+            cboNumPagina.addItem(Integer.toString(i));
+        }
+        cboNumPagina.setSelectedIndex(0);
+    }
+    
+    private void listar(String texto, boolean paginar){
+        this.totalPorPagina=Integer.parseInt((String)cboTotalPorPagina.getSelectedItem());
+        if ((String)cboNumPagina.getSelectedItem()!=null){
+            this.numPagina=Integer.parseInt((String)cboNumPagina.getSelectedItem());
+        }
+        
+        if (paginar==true){
+            tablaListado.setModel(this.CONTROL.listar(texto,this.totalPorPagina,this.numPagina));
+        }else{
+            tablaListado.setModel(this.CONTROL.listar(texto,this.totalPorPagina,1));
+        }
+        
+        
         TableRowSorter orden= new TableRowSorter(tablaListado.getModel());
         tablaListado.setRowSorter(orden);
         this.ocultarColumnas();
@@ -140,6 +170,10 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
         btnEditar = new javax.swing.JButton();
         btnDesactivar = new javax.swing.JButton();
         btnActivar = new javax.swing.JButton();
+        cboNumPagina = new javax.swing.JComboBox();
+        cboTotalPorPagina = new javax.swing.JComboBox();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -220,6 +254,23 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
             }
         });
 
+        cboNumPagina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboNumPaginaActionPerformed(evt);
+            }
+        });
+
+        cboTotalPorPagina.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10", "20", "50", "100", "200", "500" }));
+        cboTotalPorPagina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTotalPorPaginaActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("# Página");
+
+        jLabel11.setText("Total de registros por página");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -243,7 +294,16 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnActivar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 285, Short.MAX_VALUE)
-                        .addComponent(lblTotalRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblTotalRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cboNumPagina, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cboTotalPorPagina, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -257,8 +317,14 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
                     .addComponent(btnNuevo)
                     .addComponent(btnEditar))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cboNumPagina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboTotalPorPagina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTotalRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDesactivar)
@@ -429,7 +495,7 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        this.listar(txtBuscar.getText());
+        this.listar(txtBuscar.getText(),false);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
@@ -480,13 +546,13 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
     private void btnDesactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesactivarActionPerformed
         if (tablaListado.getSelectedRowCount() == 1) {
             String id= String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),0));
-            String nombre= String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),1));
+            String nombre= String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),4));
             
             if(JOptionPane.showConfirmDialog(this,"Deseas desactivar el registro: " + nombre + " ?", "Desactivar", JOptionPane.YES_NO_OPTION)==0){
                 String resp=this.CONTROL.desactivar(Integer.parseInt(id));
                 if (resp.equals("OK")){
                     this.mensajeOk("Registro desactivado");
-                    this.listar("");
+                    this.listar("", false);
                 }else{
                     this.mensajeError(resp);
                 }
@@ -499,13 +565,13 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
     private void btnActivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarActionPerformed
         if (tablaListado.getSelectedRowCount() == 1) {
             String id= String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),0));
-            String nombre= String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),1));
+            String nombre= String.valueOf(tablaListado.getValueAt(tablaListado.getSelectedRow(),4));
             
             if(JOptionPane.showConfirmDialog(this,"Deseas activar el registro: " + nombre + " ?", "Activar", JOptionPane.YES_NO_OPTION)==0){
                 String resp=this.CONTROL.activar(Integer.parseInt(id));
                 if (resp.equals("OK")){
                     this.mensajeOk("Registro activado");
-                    this.listar("");
+                    this.listar("", false);
                 }else{
                     this.mensajeError(resp);
                 }
@@ -555,9 +621,12 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
             Categoria seleccionado = (Categoria)cboCategoria.getSelectedItem();
             resp=this.CONTROL.actualizar(Integer.parseInt(txtId.getText()),seleccionado.getId(),txtCodigo.getText(),txtNombre.getText(),this.nombreAnt,Double.parseDouble(txtPrecioVenta.getText()),Integer.parseInt(txtStock.getText()), txtDescripcion.getText(),imagenActual);
             if(resp.equals("OK")){
+                if (!this.imagen.equals("")){
+                    
+                }
                 this.mensajeOk("Actualizado correctamente");
                 this.limpiar();
-                this.listar("");
+                this.listar("", false);
                 tabGeneral.setSelectedIndex(0);
                 tabGeneral.setEnabledAt(1, false);
                 tabGeneral.setEnabledAt(0, true);
@@ -574,7 +643,7 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
                 }
                 this.mensajeOk("Registrado correctamente");
                 this.limpiar();
-                this.listar("");
+                this.listar("", false);
                 /*tabGeneral.setSelectedIndex(0);
                 tabGeneral.setEnabledAt(1, false);
                 tabGeneral.setEnabledAt(0, true);*/
@@ -600,6 +669,16 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnAgregarImagenActionPerformed
 
+    private void cboNumPaginaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNumPaginaActionPerformed
+        if(this.primeraCarga==false){
+            this.listar("", true);
+        }
+    }//GEN-LAST:event_cboNumPaginaActionPerformed
+
+    private void cboTotalPorPaginaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTotalPorPaginaActionPerformed
+        this.paginar();
+    }//GEN-LAST:event_cboTotalPorPaginaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActivar;
@@ -611,7 +690,11 @@ public class FrmArticulo extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JComboBox cboCategoria;
+    private javax.swing.JComboBox cboNumPagina;
+    private javax.swing.JComboBox cboTotalPorPagina;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
