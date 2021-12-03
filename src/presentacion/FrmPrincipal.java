@@ -142,6 +142,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem7.setText("Usuarios");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         mnuAcceso.add(jMenuItem7);
 
         menuBar.add(mnuAcceso);
@@ -214,10 +219,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuAccesoActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        FrmRol frm = new FrmRol();
+        FrmRol frm=new FrmRol();
         escritorio.add(frm);
+        
+        Dimension desktopSize = escritorio.getSize();
+        Dimension FrameSize = frm.getSize();
+        frm.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         frm.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        FrmUsuario frm=new FrmUsuario();
+        escritorio.add(frm);
+        
+        Dimension desktopSize = escritorio.getSize();
+        Dimension FrameSize = frm.getSize();
+        frm.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        frm.setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
      * @param args the command line arguments
