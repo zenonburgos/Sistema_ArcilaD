@@ -125,9 +125,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         mnuAcceso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/images/acceso.png"))); // NOI18N
         mnuAcceso.setText("Acceso");
+        mnuAcceso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAccesoActionPerformed(evt);
+            }
+        });
 
         jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem8.setText("Roles");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         mnuAcceso.add(jMenuItem8);
 
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
@@ -198,6 +208,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
         frm.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         frm.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void mnuAccesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAccesoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuAccesoActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        FrmRol frm = new FrmRol();
+        escritorio.add(frm);
+        frm.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
