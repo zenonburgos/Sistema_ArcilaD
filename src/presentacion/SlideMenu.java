@@ -32,9 +32,20 @@ public class SlideMenu extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         rSButtonMetro1 = new recursos.RSButtonMetro();
         jPanel4 = new javax.swing.JPanel();
-        rSButtonMetro2 = new recursos.RSButtonMetro();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        rSButtonMetro3 = new recursos.RSButtonMetro();
+        rSButtonMetro5 = new recursos.RSButtonMetro();
+        rSButtonMetro9 = new recursos.RSButtonMetro();
+        rSButtonMetro10 = new recursos.RSButtonMetro();
+        rSButtonMetro11 = new recursos.RSButtonMetro();
+        rSButtonMetro12 = new recursos.RSButtonMetro();
+        rSButtonMetro13 = new recursos.RSButtonMetro();
+        rSButtonMetro14 = new recursos.RSButtonMetro();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 600));
@@ -72,17 +83,14 @@ public class SlideMenu extends javax.swing.JFrame {
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, -1));
 
-        rSButtonMetro2.setForeground(new java.awt.Color(166, 166, 166));
-        rSButtonMetro2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/images2/market_1.png"))); // NOI18N
-        rSButtonMetro2.setText("Categorías");
-        rSButtonMetro2.setColorNormal(new java.awt.Color(214, 217, 223));
-        rSButtonMetro2.setColorTextHover(new java.awt.Color(166, 166, 166));
-        rSButtonMetro2.setColorTextNormal(new java.awt.Color(166, 166, 166));
-        rSButtonMetro2.setColorTextPressed(new java.awt.Color(166, 166, 166));
+        jPanel4.setBackground(new java.awt.Color(214, 217, 223));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel5.setBackground(new java.awt.Color(214, 217, 223));
 
         jLabel1.setBackground(new java.awt.Color(153, 153, 153));
         jLabel1.setFont(new java.awt.Font("Decker", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(166, 166, 166));
+        jLabel1.setForeground(new java.awt.Color(128, 128, 131));
         jLabel1.setText("ALMACEN");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -97,25 +105,175 @@ public class SlideMenu extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(0, 61, Short.MAX_VALUE)
+                .addGap(0, 7, Short.MAX_VALUE)
                 .addComponent(jLabel1))
         );
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(rSButtonMetro2, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 190, 30));
+
+        rSButtonMetro3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        rSButtonMetro3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/images3/opened_folder_32px.png"))); // NOI18N
+        rSButtonMetro3.setText("Categorías");
+        rSButtonMetro3.setColorHover(new java.awt.Color(204, 204, 204));
+        rSButtonMetro3.setColorNormal(new java.awt.Color(204, 204, 204));
+        rSButtonMetro3.setColorPressed(new java.awt.Color(204, 204, 204));
+        rSButtonMetro3.setColorTextHover(new java.awt.Color(128, 128, 131));
+        rSButtonMetro3.setColorTextNormal(new java.awt.Color(128, 128, 131));
+        rSButtonMetro3.setColorTextPressed(new java.awt.Color(128, 128, 131));
+        rSButtonMetro3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        rSButtonMetro3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        rSButtonMetro3.setIconTextGap(25);
+        jPanel4.add(rSButtonMetro3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 190, -1));
+
+        rSButtonMetro5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        rSButtonMetro5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/images3/supplier_32px.png"))); // NOI18N
+        rSButtonMetro5.setText("Proveedores");
+        rSButtonMetro5.setColorHover(new java.awt.Color(166, 166, 166));
+        rSButtonMetro5.setColorNormal(new java.awt.Color(214, 217, 223));
+        rSButtonMetro5.setColorPressed(new java.awt.Color(214, 217, 223));
+        rSButtonMetro5.setColorTextHover(new java.awt.Color(128, 128, 131));
+        rSButtonMetro5.setColorTextNormal(new java.awt.Color(128, 128, 131));
+        rSButtonMetro5.setColorTextPressed(new java.awt.Color(128, 128, 131));
+        rSButtonMetro5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        rSButtonMetro5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        rSButtonMetro5.setIconTextGap(25);
+        jPanel4.add(rSButtonMetro5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 190, -1));
+
+        rSButtonMetro9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        rSButtonMetro9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/images3/product_32px.png"))); // NOI18N
+        rSButtonMetro9.setText("Productos");
+        rSButtonMetro9.setColorHover(new java.awt.Color(166, 166, 166));
+        rSButtonMetro9.setColorNormal(new java.awt.Color(214, 217, 223));
+        rSButtonMetro9.setColorPressed(new java.awt.Color(214, 217, 223));
+        rSButtonMetro9.setColorTextHover(new java.awt.Color(128, 128, 131));
+        rSButtonMetro9.setColorTextNormal(new java.awt.Color(128, 128, 131));
+        rSButtonMetro9.setColorTextPressed(new java.awt.Color(128, 128, 131));
+        rSButtonMetro9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        rSButtonMetro9.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        rSButtonMetro9.setIconTextGap(25);
+        jPanel4.add(rSButtonMetro9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 190, -1));
+
+        rSButtonMetro10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        rSButtonMetro10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/images3/add_to_collection_32px.png"))); // NOI18N
+        rSButtonMetro10.setText("Ingresos");
+        rSButtonMetro10.setColorHover(new java.awt.Color(166, 166, 166));
+        rSButtonMetro10.setColorNormal(new java.awt.Color(214, 217, 223));
+        rSButtonMetro10.setColorPressed(new java.awt.Color(214, 217, 223));
+        rSButtonMetro10.setColorTextHover(new java.awt.Color(128, 128, 131));
+        rSButtonMetro10.setColorTextNormal(new java.awt.Color(128, 128, 131));
+        rSButtonMetro10.setColorTextPressed(new java.awt.Color(128, 128, 131));
+        rSButtonMetro10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        rSButtonMetro10.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        rSButtonMetro10.setIconTextGap(25);
+        jPanel4.add(rSButtonMetro10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 190, -1));
+
+        rSButtonMetro11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        rSButtonMetro11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/images3/salary_female_32px.png"))); // NOI18N
+        rSButtonMetro11.setText("Clientes");
+        rSButtonMetro11.setColorHover(new java.awt.Color(166, 166, 166));
+        rSButtonMetro11.setColorNormal(new java.awt.Color(214, 217, 223));
+        rSButtonMetro11.setColorPressed(new java.awt.Color(214, 217, 223));
+        rSButtonMetro11.setColorTextHover(new java.awt.Color(128, 128, 131));
+        rSButtonMetro11.setColorTextNormal(new java.awt.Color(128, 128, 131));
+        rSButtonMetro11.setColorTextPressed(new java.awt.Color(128, 128, 131));
+        rSButtonMetro11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        rSButtonMetro11.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        rSButtonMetro11.setIconTextGap(25);
+        jPanel4.add(rSButtonMetro11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 190, -1));
+
+        rSButtonMetro12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        rSButtonMetro12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/images3/sell_stock_32px.png"))); // NOI18N
+        rSButtonMetro12.setText("Ventas");
+        rSButtonMetro12.setColorHover(new java.awt.Color(166, 166, 166));
+        rSButtonMetro12.setColorNormal(new java.awt.Color(214, 217, 223));
+        rSButtonMetro12.setColorPressed(new java.awt.Color(214, 217, 223));
+        rSButtonMetro12.setColorTextHover(new java.awt.Color(128, 128, 131));
+        rSButtonMetro12.setColorTextNormal(new java.awt.Color(128, 128, 131));
+        rSButtonMetro12.setColorTextPressed(new java.awt.Color(128, 128, 131));
+        rSButtonMetro12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        rSButtonMetro12.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        rSButtonMetro12.setIconTextGap(25);
+        jPanel4.add(rSButtonMetro12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 190, -1));
+
+        rSButtonMetro13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        rSButtonMetro13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/images3/admin_settings_male_32px.png"))); // NOI18N
+        rSButtonMetro13.setText("Roles");
+        rSButtonMetro13.setColorHover(new java.awt.Color(166, 166, 166));
+        rSButtonMetro13.setColorNormal(new java.awt.Color(214, 217, 223));
+        rSButtonMetro13.setColorPressed(new java.awt.Color(214, 217, 223));
+        rSButtonMetro13.setColorTextHover(new java.awt.Color(128, 128, 131));
+        rSButtonMetro13.setColorTextNormal(new java.awt.Color(128, 128, 131));
+        rSButtonMetro13.setColorTextPressed(new java.awt.Color(128, 128, 131));
+        rSButtonMetro13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        rSButtonMetro13.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        rSButtonMetro13.setIconTextGap(25);
+        jPanel4.add(rSButtonMetro13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 190, -1));
+
+        rSButtonMetro14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        rSButtonMetro14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/images3/team_32px.png"))); // NOI18N
+        rSButtonMetro14.setText("Usuarios");
+        rSButtonMetro14.setColorHover(new java.awt.Color(166, 166, 166));
+        rSButtonMetro14.setColorNormal(new java.awt.Color(214, 217, 223));
+        rSButtonMetro14.setColorPressed(new java.awt.Color(214, 217, 223));
+        rSButtonMetro14.setColorTextHover(new java.awt.Color(128, 128, 131));
+        rSButtonMetro14.setColorTextNormal(new java.awt.Color(128, 128, 131));
+        rSButtonMetro14.setColorTextPressed(new java.awt.Color(128, 128, 131));
+        rSButtonMetro14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        rSButtonMetro14.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        rSButtonMetro14.setIconTextGap(25);
+        jPanel4.add(rSButtonMetro14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 190, -1));
+
+        jPanel6.setBackground(new java.awt.Color(214, 217, 223));
+
+        jLabel2.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel2.setFont(new java.awt.Font("Decker", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(128, 128, 131));
+        jLabel2.setText("COMPRAS");
+        jLabel2.setToolTipText("");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(75, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(357, Short.MAX_VALUE))
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGap(0, 7, Short.MAX_VALUE)
+                .addComponent(jLabel2))
         );
+
+        jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 190, -1));
+
+        jPanel7.setBackground(new java.awt.Color(214, 217, 223));
+
+        jLabel3.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel3.setFont(new java.awt.Font("Decker", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(128, 128, 131));
+        jLabel3.setText("VENTAS");
+        jLabel3.setToolTipText("");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(75, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addGap(0, 7, Short.MAX_VALUE)
+                .addComponent(jLabel3))
+        );
+
+        jPanel4.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 190, -1));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 190, 500));
 
@@ -181,12 +339,23 @@ public class SlideMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private recursos.RSButtonMetro rSButtonMetro1;
-    private recursos.RSButtonMetro rSButtonMetro2;
+    private recursos.RSButtonMetro rSButtonMetro10;
+    private recursos.RSButtonMetro rSButtonMetro11;
+    private recursos.RSButtonMetro rSButtonMetro12;
+    private recursos.RSButtonMetro rSButtonMetro13;
+    private recursos.RSButtonMetro rSButtonMetro14;
+    private recursos.RSButtonMetro rSButtonMetro3;
+    private recursos.RSButtonMetro rSButtonMetro5;
+    private recursos.RSButtonMetro rSButtonMetro9;
     // End of variables declaration//GEN-END:variables
 }
