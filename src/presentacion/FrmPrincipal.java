@@ -236,6 +236,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         Dimension FrameSize = frm.getSize();
         frm.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         frm.setVisible(true);
+        //frm.setUI(null); Para quitar todo el marco de la ventana        
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
@@ -250,7 +251,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

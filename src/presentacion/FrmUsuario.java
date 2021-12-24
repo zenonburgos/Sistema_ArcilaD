@@ -305,6 +305,8 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Rol (*)");
 
+        cboRol.setBorder(null);
+
         jLabel2.setText("Nombre (*)");
 
         jLabel12.setText("Tipo Documento");
